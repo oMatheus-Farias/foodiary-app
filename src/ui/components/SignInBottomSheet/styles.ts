@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
   },
   heading: {
     letterSpacing: -0.32,
+    textAlign: 'center',
   },
   form: {
     gap: 32,
