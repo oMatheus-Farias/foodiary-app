@@ -4,19 +4,23 @@
   "main": "index.ts",
   "scripts": {
     "start": "export ANDROID_HOME=$HOME/Android/Sdk && export PATH=$ANDROID_HOME/platform-tools:$PATH && expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@expo-google-fonts/host-grotesk": "^0.4.1",
+    "@gorhom/bottom-sheet": "^5.2.6",
     "expo": "54.0.13",
     "expo-status-bar": "~3.0.8",
     "font": "^0.0.4",
     "react": "19.1.0",
     "react-native": "0.81.4",
+    "react-native-gesture-handler": "~2.28.0",
+    "react-native-reanimated": "~4.1.1",
     "react-native-safe-area-context": "~5.6.1",
-    "react-native-svg": "15.12.1"
+    "react-native-svg": "15.12.1",
+    "react-native-worklets": "0.5.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
