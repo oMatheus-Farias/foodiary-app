@@ -11,9 +11,12 @@ import { theme } from '@ui/styles/theme';
 import { SignInBottomSheet } from '@ui/components/SignInBottomSheet';
 import { useRef } from 'react';
 import { ISignInBottomSheet } from '@ui/components/SignInBottomSheet/ISignInBottomSheet';
+import { useNavigation } from '@react-navigation/native';
+import { AuthStackNavigationProps } from '@app/navigation/AuthStack';
 
 export function Greetings() {
   const signInBottomSheetRef = useRef<ISignInBottomSheet>(null);
+  const navigation = useNavigation<AuthStackNavigationProps>();
 
   return (
     <>
@@ -27,7 +30,7 @@ export function Greetings() {
             </AppText>
 
             <View style={styles.ctaContent}>
-              <Button>Criar conta</Button>
+              <Button onPress={() => navigation.navigate('Onboarding')}>Criar conta</Button>
 
               <View style={styles.signInContainer}>
                 <AppText color={theme.colors.white}>Já tem conta?</AppText>
