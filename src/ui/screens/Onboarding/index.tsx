@@ -1,12 +1,16 @@
-import { AppText } from '@ui/components/AppText';
+import { OnboardingStack } from '@ui/screens/Onboarding/OnboardingStack';
 import { View } from 'react-native';
+import { OnboardingProvider } from './context/OnboardingProvider';
+import { OnboardingHeader } from './components/OnboardingHeader';
+import { theme } from '@ui/styles/theme';
 
 export function Onboarding() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <AppText size="3xl" weight="semiBold">
-        Onboarding
-      </AppText>
-    </View>
+    <OnboardingProvider>
+      <View style={{ flex: 1, backgroundColor: theme.colors.white }}>
+        <OnboardingHeader />
+        <OnboardingStack />
+      </View>
+    </OnboardingProvider>
   );
 }
