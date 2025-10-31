@@ -13,6 +13,8 @@ import { theme } from '@ui/styles/theme';
 import { FormGroup } from '@ui/components/FormGroup';
 import { Input } from '@ui/components/Input';
 import { formatDecimal } from '@ui/utils/formatDecimal';
+import { Controller, useFormContext } from 'react-hook-form';
+import { OnboardingSchema } from '../schema';
 
 export enum Goal {
   LOSE = 'LOSE',
@@ -22,6 +24,17 @@ export enum Goal {
 
 export function WeightStep() {
   const { nextStep } = useOnboarding();
+  const form = useFormContext<OnboardingSchema>();
+
+  async function handleNextStep() {
+    const isValid = await form.trigger('weight');
+
+    if (isValid) {
+      return nextStep();
+    }
+
+    return;
+  }
 
   return (
     <Step>
@@ -31,13 +44,29 @@ export function WeightStep() {
       </StepHeader>
 
       <StepContent position="center">
-        <FormGroup label="Peso" style={{ width: '100%' }}>
-          <Input autoFocus placeholder="80" keyboardType="numeric" formatter={formatDecimal} />
-        </FormGroup>
+        <Controller
+          control={form.control}
+          name="weight"
+          render={({ field, fieldState }) => (
+            <FormGroup label="Peso" style={{ width: '100%' }} error={fieldState.error?.message}>
+              <Input
+                autoFocus
+                placeholder="80"
+                keyboardType="numeric"
+                formatter={formatDecimal}
+                value={field.value}
+                onChangeText={(value) => {
+                  field.onChange(value);
+                  form.trigger('weight');
+                }}
+              />
+            </FormGroup>
+          )}
+        />
       </StepContent>
 
       <StepFooter>
-        <Button size="icon" onPress={nextStep}>
+        <Button size="icon" onPress={handleNextStep}>
           <ArrowRightIcon size={20} color={theme.colors.black[700]} />
         </Button>
       </StepFooter>
