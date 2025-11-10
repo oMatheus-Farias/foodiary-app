@@ -13,9 +13,9 @@ import { FormGroup } from '@ui/components/FormGroup';
 import { Input } from '@ui/components/Input';
 import { Controller, useFormContext } from 'react-hook-form';
 import { OnboardingSchema } from '../schema';
-import { AuthService } from '@app/services/AuthService';
 import { isAxiosError } from 'axios';
 import { ErrorCode } from '@app/types/ErrorCode';
+import { useAuth } from '@app/contexts/AuthContext/useAuth';
 
 export function CreateAccountStep() {
   const emailInputRef = useRef<TextInput>(null);
@@ -23,13 +23,15 @@ export function CreateAccountStep() {
   const confirmPasswordInputRef = useRef<TextInput>(null);
 
   const form = useFormContext<OnboardingSchema>();
+  const { signUp } = useAuth();
+
   const formIsSubmitting = form.formState.isSubmitting;
 
   const handleSubmit = form.handleSubmit(async (data: OnboardingSchema) => {
     const birthDate = data.birthDate.toISOString().split('T')[0];
 
     try {
-      const response = await AuthService.signUp({
+      await signUp({
         account: {
           email: data.account.email,
           password: data.account.password,
@@ -44,8 +46,6 @@ export function CreateAccountStep() {
           activityLevel: data.activityLevel,
         },
       });
-
-      console.log(JSON.stringify(response, null, 2));
     } catch (error) {
       if (
         isAxiosError(error) &&

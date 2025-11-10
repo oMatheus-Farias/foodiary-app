@@ -20,7 +20,7 @@ interface ISignInBottomSheetProps {
 }
 
 export function SignInBottomSheet({ ref }: ISignInBottomSheetProps) {
-  const { bottom, bottomSheetModalRef, passwordInputRef, form, handleSubmit } =
+  const { bottom, bottomSheetModalRef, passwordInputRef, form, handleSubmit, isLoading } =
     useSignInBottomSheetController({ ref });
 
   const formIsSubmitting = form.formState.isSubmitting;
@@ -78,7 +78,7 @@ export function SignInBottomSheet({ ref }: ISignInBottomSheetProps) {
               )}
             />
 
-            <Button onPress={handleSubmit} isLoading={formIsSubmitting}>
+            <Button onPress={handleSubmit} isLoading={formIsSubmitting} disabled={isLoading}>
               Entrar
             </Button>
           </View>
