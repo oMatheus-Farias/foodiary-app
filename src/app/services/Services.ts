@@ -40,6 +40,12 @@ export abstract class Service {
 
         await refreshHandler();
 
+        const newToken = this.client.defaults.headers.common.Authorization;
+
+        if (error.config.headers && newToken) {
+          error.config.headers.Authorization = newToken;
+        }
+
         return this.client(error.config);
       },
     );
