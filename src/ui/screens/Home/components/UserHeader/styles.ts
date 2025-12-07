@@ -1,3 +1,4 @@
+import { theme } from '@ui/styles/theme';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -6,6 +7,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
+    backgroundColor: theme.colors.lime[400],
+    paddingBottom: 30,
   },
   userInfor: {
     flexDirection: 'row',
@@ -18,5 +21,7 @@ export const styles = StyleSheet.create({
     height: 48,
     borderRadius: 24,
   },
-  greetings: {},
+  greetings: {
+    gap: 2,
+  },
 });
