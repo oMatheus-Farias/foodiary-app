@@ -9,6 +9,7 @@ import { ItemSeparator } from './components/ItemSeparator';
 import { FullScreenLoader } from './components/FullScreenLoader';
 import { useHomeController } from './useHomeController';
 import { HomeProvider } from './context/HomeProvider';
+import { Fab } from './components/Fab';
 
 export function Home() {
   const {
@@ -57,6 +58,8 @@ export function Home() {
           renderItem={({ item: meal }) => <MealCard meal={meal} />}
         />
       </HomeProvider>
+
+      {meals.length > 0 && <Fab />}
     </View>
   );
 }
