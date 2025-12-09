@@ -12,9 +12,10 @@ import { CameraView } from 'expo-camera';
 interface IPictureModalProps {
   visible: boolean;
   onClose: () => void;
+  onCreate?: () => void;
 }
 
-export function PictureModal({ visible, onClose }: IPictureModalProps) {
+export function PictureModal({ visible, onClose, onCreate }: IPictureModalProps) {
   const {
     isLoading,
     permission,
@@ -24,7 +25,7 @@ export function PictureModal({ visible, onClose }: IPictureModalProps) {
     handleTakePicture,
     handleTryAgain,
     handleConfirm,
-  } = usePictureModalController();
+  } = usePictureModalController({ onClose, onCreate });
 
   return (
     <Modal

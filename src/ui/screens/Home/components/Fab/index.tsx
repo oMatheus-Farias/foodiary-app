@@ -17,6 +17,10 @@ export function Fab() {
     bottomSheetModalRef.current?.present();
   }
 
+  function handleCloseBottomSheet() {
+    bottomSheetModalRef.current?.dismiss();
+  }
+
   return (
     <>
       <View style={[styles.container, { bottom }]}>
@@ -32,7 +36,7 @@ export function Fab() {
               Cadastre sua refeição
             </AppText>
 
-            <CreateMealOptions />
+            <CreateMealOptions onCreate={handleCloseBottomSheet} />
           </BottomSheetView>
         </BottomSheetModal>
       </BottomSheetModalProvider>
