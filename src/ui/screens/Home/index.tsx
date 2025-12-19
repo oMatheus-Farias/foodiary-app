@@ -1,5 +1,5 @@
 import { WelcomeModal } from '@ui/components/WelcomeModal';
-import { FlatList, RefreshControl, View } from 'react-native';
+import { FlatList, RefreshControl, StatusBar, View } from 'react-native';
 import { styles } from './styles';
 import { Header } from './components/Header';
 import { theme } from '@ui/styles/theme';
@@ -31,6 +31,7 @@ export function Home() {
 
   return (
     <View style={[styles.container, { paddingTop: top }]}>
+      <StatusBar barStyle="dark-content" animated translucent />
       <WelcomeModal />
 
       <HomeProvider

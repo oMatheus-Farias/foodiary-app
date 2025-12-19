@@ -1,18 +1,28 @@
-import { AppText } from '@ui/components/AppText';
-import { View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { styles } from './styles';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import { AppStackRouteProps } from '@app/navigation/AppStack';
-import { Button } from '@ui/components/Button';
+import { Header } from './components/Header';
+import { useMeal } from '@app/hooks/queries/useMeal';
+import { AppText } from '@ui/components/AppText';
 
 export function MealDetails() {
   const { params } = useRoute<AppStackRouteProps<'MealDetails'>>();
-  const { goBack } = useNavigation();
+  const { meal } = useMeal(params.mealId);
 
   return (
     <View style={styles.container}>
-      <AppText>Meal Details: {params.mealId}</AppText>
-      <Button onPress={goBack}>Voltar</Button>
+      <FlatList
+        data={meal?.foods ?? []}
+        ListHeaderComponent={<Header meal={meal} />}
+        renderItem={({ item: food }) => (
+          <View style={styles.food}>
+            <AppText>
+              {food.quantity} {food.name}
+            </AppText>
+          </View>
+        )}
+      />
     </View>
   );
 }
