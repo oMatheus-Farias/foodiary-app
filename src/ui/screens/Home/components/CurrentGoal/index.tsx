@@ -15,12 +15,19 @@ export function CurrentGoal() {
         .flatMap((meal) => meal.foods)
         .reduce(
           (acc, food) => {
-            acc.calories += food.calories;
-            acc.proteins += food.proteins;
-            acc.carbohydrates += food.carbohydrates;
-            acc.fats += food.fats;
+            const proteinsCalories = food.proteins * 4;
+            const carbohydratesCalories = food.carbohydrates * 4;
+            const fatsCalories = food.fats * 9;
+            const totalCalories = Math.round(
+              proteinsCalories + carbohydratesCalories + fatsCalories,
+            );
 
-            return acc;
+            return {
+              calories: acc.calories + totalCalories,
+              proteins: acc.proteins + food.proteins,
+              carbohydrates: acc.carbohydrates + food.carbohydrates,
+              fats: acc.fats + food.fats,
+            };
           },
           { calories: 0, proteins: 0, carbohydrates: 0, fats: 0 },
         ),

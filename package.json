@@ -29,6 +29,7 @@
     "expo-video": "~3.0.15",
     "font": "^0.0.4",
     "lucide-react-native": "^0.545.0",
+    "moti": "^0.30.0",
     "react": "19.1.0",
     "react-hook-form": "^7.65.0",
     "react-native": "0.81.5",
